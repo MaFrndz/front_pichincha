@@ -1,0 +1,23 @@
+:host {
+	display: block;
+	min-height: 100vh;
+	background: #ffffff;
+}
+
+.shell {
+	min-height: 100vh;
+	display: grid;
+	grid-template-columns: 220px 1fr;
+	grid-template-rows: 56px 1fr;
+}
+
+.content {
+	min-width: 0;
+}
+
+@media (max-width: 800px) {
+	.shell {
+		grid-template-columns: 1fr;
+		grid-template-rows: 56px auto 1fr;
+	}
+}

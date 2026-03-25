@@ -1,0 +1,51 @@
+:host {
+  display: block;
+}
+
+.page {
+  padding: 22px 28px;
+}
+
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: 44px;
+}
+
+button {
+  min-width: 120px;
+  height: 44px;
+  border: 0;
+  background: #f2d309;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+input {
+  width: 320px;
+  height: 38px;
+  border: 1px solid #dcdcdc;
+  padding: 8px 10px;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #e5e5e5;
+  height: 58px;
+  text-align: center;
+  vertical-align: middle;
+}
