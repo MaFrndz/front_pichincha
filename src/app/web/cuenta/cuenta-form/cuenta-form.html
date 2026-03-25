@@ -23,9 +23,17 @@
 
         <label>
           <span>Cliente Id</span>
-          <input type="number" formControlName="clienteId" />
+          <select formControlName="clienteId">
+            <option [ngValue]="0">Seleccione un cliente</option>
+            @for (cliente of clientes(); track cliente.id) {
+              <option [ngValue]="cliente.id">{{ cliente.nombre }} (ID: {{ cliente.id }})</option>
+            }
+          </select>
           @if (fieldInvalid('clienteId')) {
             <small>Cliente Id válido es obligatorio.</small>
+          }
+          @if (clientesError(); as clientesErrorMessage) {
+            <small>{{ clientesErrorMessage }}</small>
           }
         </label>
 

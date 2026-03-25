@@ -1,4 +1,44 @@
 <section class="page">
   <h1>Movimientos</h1>
-  <p>Consulta de movimientos.</p>
+
+  @if (loading()) {
+    <p>Cargando movimientos...</p>
+  }
+
+  @if (error(); as errorMessage) {
+    <p>{{ errorMessage }}</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Número Cuenta</th>
+        <th>Tipo</th>
+        <th>Saldo inicial</th>
+        <th>Estado</th>
+        <th>Movimiento</th>
+        <th>Saldo disponible</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (movimiento of movimientos(); track movimiento.id) {
+        <tr>
+          <td>{{ movimiento.fecha | date:'dd/MM/yyyy' }}</td>
+          <td>{{ movimiento.nombreCliente }}</td>
+          <td>{{ movimiento.numeroCuenta }}</td>
+          <td>{{ movimiento.tipoCuenta }}</td>
+          <td>{{ movimiento.saldoInicial | currency:'PEN':'symbol-narrow':'1.2-2':'es-PE' }}</td>
+          <td>{{ movimiento.estado }}</td>
+          <td>{{ movimiento.monto | currency:'PEN':'symbol-narrow':'1.2-2':'es-PE' }}</td>
+          <td>{{ movimiento.saldoDisponible | currency:'PEN':'symbol-narrow':'1.2-2':'es-PE' }}</td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="8">Sin movimientos para mostrar.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
 </section>

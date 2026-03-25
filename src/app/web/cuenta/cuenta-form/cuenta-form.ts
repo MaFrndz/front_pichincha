@@ -4,6 +4,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { Cuenta, CuentaDraft } from '../cuenta-model';
 import { CuentaService } from '../cuenta-service';
+import { Cliente } from '../../cliente/service/cliente.model';
+import { ClienteService } from '../../cliente/service/cliente.service';
 
 @Component({
   selector: 'app-cuenta-form',
@@ -16,12 +18,15 @@ export class CuentaFormComponent {
   protected readonly saving = signal(false);
   protected readonly loading = signal(false);
   protected readonly error = signal<string | null>(null);
+  protected readonly clientesError = signal<string | null>(null);
   protected readonly isEditMode = signal(false);
+  protected readonly clientes = signal<Cliente[]>([]);
 
   private currentCuentaId: number | null = null;
 
   private readonly formBuilder = inject(FormBuilder);
   private readonly cuentaService = inject(CuentaService);
+  private readonly clienteService = inject(ClienteService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
@@ -34,6 +39,8 @@ export class CuentaFormComponent {
   });
 
   constructor() {
+    this.loadClientes();
+
     const idParam = this.route.snapshot.paramMap.get('id');
 
     if (idParam) {
@@ -109,6 +116,19 @@ export class CuentaFormComponent {
       error: () => {
         this.error.set('No se pudo cargar la cuenta.');
         this.loading.set(false);
+      }
+    });
+  }
+
+  private loadClientes(): void {
+    this.clientesError.set(null);
+
+    this.clienteService.getClientes().subscribe({
+      next: (clientes) => {
+        this.clientes.set(clientes);
+      },
+      error: () => {
+        this.clientesError.set('No se pudo cargar la lista de clientes.');
       }
     });
   }
