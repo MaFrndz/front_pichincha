@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { Cliente, ClienteDraft } from '../cliente.model';
-import { ClienteService } from '../cliente.service';
+import { Cliente, ClienteDraft } from '../service/cliente.model';
+import { ClienteService } from '../service/cliente.service';
 
 @Component({
   selector: 'app-cliente-form',

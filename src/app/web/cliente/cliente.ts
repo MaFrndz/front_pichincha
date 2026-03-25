@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Cliente } from './cliente.model';
-import { ClienteService } from './cliente.service';
+import { Cliente } from './service/cliente.model';
+import { ClienteService } from './service/cliente.service';
 
 @Component({
   selector: 'app-cliente',
