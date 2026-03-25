@@ -1,0 +1,101 @@
+<section class="page">
+  <div class="heading-row">
+    <div>
+      <h1>@if (isEditMode()) { Editar cliente } @else { Nuevo cliente }</h1>
+      <p>Completa los datos del cliente para guardar el registro.</p>
+    </div>
+
+    <a routerLink="/clientes" class="secondary-action">Volver</a>
+  </div>
+
+  @if (loading()) {
+    <p>Cargando cliente...</p>
+  } @else {
+    <form class="form-card" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-grid">
+        <label>
+          <span>Cliente Id</span>
+          <input type="text" formControlName="clienteId" />
+          @if (fieldInvalid('clienteId')) {
+            <small>Cliente Id es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Nombre</span>
+          <input type="text" formControlName="nombre" />
+          @if (fieldInvalid('nombre')) {
+            <small>Nombre es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Género</span>
+          <input type="text" formControlName="genero" />
+          @if (fieldInvalid('genero')) {
+            <small>Género es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Edad</span>
+          <input type="number" formControlName="edad" />
+          @if (fieldInvalid('edad')) {
+            <small>Edad es obligatoria.</small>
+          }
+        </label>
+
+        <label>
+          <span>Identificación</span>
+          <input type="text" formControlName="identificacion" />
+          @if (fieldInvalid('identificacion')) {
+            <small>Identificación es obligatoria.</small>
+          }
+        </label>
+
+        <label>
+          <span>Dirección</span>
+          <input type="text" formControlName="direccion" />
+          @if (fieldInvalid('direccion')) {
+            <small>Dirección es obligatoria.</small>
+          }
+        </label>
+
+        <label>
+          <span>Teléfono</span>
+          <input type="text" formControlName="telefono" />
+          @if (fieldInvalid('telefono')) {
+            <small>Teléfono es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Contraseña</span>
+          <input type="text" formControlName="contrasena" />
+          @if (fieldInvalid('contrasena')) {
+            <small>Contraseña es obligatoria.</small>
+          }
+        </label>
+
+        <label>
+          <span>Estado</span>
+          <input type="text" formControlName="estado" />
+          @if (fieldInvalid('estado')) {
+            <small>Estado es obligatorio.</small>
+          }
+        </label>
+      </div>
+
+      @if (error(); as errorMessage) {
+        <p class="error-message">{{ errorMessage }}</p>
+      }
+
+      <div class="actions-row">
+        <a routerLink="/clientes" class="secondary-action">Cancelar</a>
+        <button type="submit" [disabled]="saving()">
+          @if (saving()) { Guardando... } @else if (isEditMode()) { Actualizar } @else { Crear }
+        </button>
+      </div>
+    </form>
+  }
+</section>

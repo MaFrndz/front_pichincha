@@ -10,3 +10,5 @@ export interface Cliente {
   nombre: string;
   telefono: string;
 }
+
+export type ClienteDraft = Omit<Cliente, 'id'>;

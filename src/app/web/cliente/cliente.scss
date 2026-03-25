@@ -30,6 +30,23 @@ button {
   cursor: pointer;
 }
 
+.table-action {
+  min-width: 92px;
+  height: 36px;
+  font-size: 16px;
+  margin: 0 4px;
+}
+
+.table-action-delete {
+  background: #b42318;
+  color: #fff;
+}
+
+.table-action:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 input {
   width: 320px;
   height: 38px;

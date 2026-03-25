@@ -1,7 +1,7 @@
 <section class="page">
   <div class="heading-row">
     <h1>Clientes</h1>
-    <button type="button">Nuevo</button>
+    <button type="button" (click)="goToCreateCliente()">Nuevo</button>
   </div>
 
   <input
@@ -30,6 +30,7 @@
         <th>Telefono</th>
         <th>Contraseña</th>        
         <th>Estado</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -41,10 +42,23 @@
           <td>{{ cliente.telefono }}</td>
           <td>{{ cliente.contrasena }}</td> 
           <td>{{ cliente.estado }}</td>
+          <td>
+            <button type="button" class="table-action" (click)="goToEditCliente(cliente.id)">
+              Editar
+            </button>
+            <button
+              type="button"
+              class="table-action table-action-delete"
+              (click)="deleteCliente(cliente.id)"
+              [disabled]="deletingId() === cliente.id"
+            >
+              @if (deletingId() === cliente.id) { Borrando... } @else { Borrar }
+            </button>
+          </td>
         </tr>
       } @empty {
         <tr>
-          <td colspan="5">Sin clientes para mostrar.</td>
+          <td colspan="6">Sin clientes para mostrar.</td>
         </tr>
       }
     </tbody>
