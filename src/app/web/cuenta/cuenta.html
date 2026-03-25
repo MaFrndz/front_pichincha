@@ -19,7 +19,7 @@
         <th>Tipo de cuenta</th>
         <th>Saldo</th>
         <th>Estado</th>
-        <th>Cliente Id</th>
+        <th>Nombre completo</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -30,16 +30,24 @@
           <td>{{ cuenta.tipoCuenta ?? '-' }}</td>
           <td>{{ (cuenta.saldo ?? 0) | currency:'PEN':'symbol-narrow':'1.2-2':'es-PE' }}</td>
           <td>{{ cuenta.estado ?? '-' }}</td>
-          <td>{{ cuenta.clienteId ?? '-' }}</td>
+          <td>{{ cuenta.nombreCompleto ?? '-' }}</td>
           <td>
             <button type="button" class="table-action" (click)="goToEditCuenta(cuenta.id)">
               Editar
+            </button>
+            <button
+              type="button"
+              class="table-action table-action-delete"
+              (click)="deleteCuenta(cuenta.id)"
+              [disabled]="deletingId() === cuenta.id"
+            >
+              @if (deletingId() === cuenta.id) { Borrando... } @else { Borrar }
             </button>
           </td>
         </tr>
       } @empty {
         <tr>
-          <td colspan="6">Sin cuentas para mostrar.</td>
+          <td colspan="7">Sin cuentas para mostrar.</td>
         </tr>
       }
     </tbody>

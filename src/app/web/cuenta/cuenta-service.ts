@@ -29,4 +29,8 @@ export class CuentaService {
   updateCuenta(id: number, cuenta: CuentaDraft): Observable<Cuenta> {
     return this.http.put<Cuenta>(`${this.endpoint}/${id}`, cuenta);
   }
+
+  deleteCuenta(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.endpoint}/${id}`);
+  }
 }

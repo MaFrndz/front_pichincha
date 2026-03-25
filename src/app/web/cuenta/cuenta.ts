@@ -16,6 +16,7 @@ export class CuentaComponent {
   protected readonly cuentas = signal<Cuenta[]>([]);
   protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
+  protected readonly deletingId = signal<number | null>(null);
 
   private readonly cuentaService: CuentaService = inject(CuentaService);
   private readonly router = inject(Router);
@@ -46,5 +47,27 @@ export class CuentaComponent {
 
   protected goToEditCuenta(id: number): void {
     void this.router.navigate(['/cuentas/editar', id]);
+  }
+
+  protected deleteCuenta(id: number): void {
+    const confirmed = window.confirm('Deseas eliminar esta cuenta?');
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.deletingId.set(id);
+    this.error.set(null);
+
+    this.cuentaService.deleteCuenta(id).subscribe({
+      next: () => {
+        this.cuentas.update((cuentas) => cuentas.filter((cuenta) => cuenta.id !== id));
+        this.deletingId.set(null);
+      },
+      error: () => {
+        this.error.set('No se pudo eliminar la cuenta.');
+        this.deletingId.set(null);
+      }
+    });
   }
 }
