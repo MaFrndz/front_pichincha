@@ -1,5 +1,8 @@
 <section class="page">
-  <h1>Cuentas</h1>
+  <div class="heading-row">
+    <h1>Cuentas</h1>
+    <button type="button" (click)="goToCreateCuenta()">Nueva cuenta</button>
+  </div>
 
   @if (loading()) {
     <p>Cargando cuentas...</p>
@@ -14,9 +17,10 @@
       <tr>
         <th>Número de cuenta</th>
         <th>Tipo de cuenta</th>
-        <th>Saldo inicial</th>
+        <th>Saldo</th>
         <th>Estado</th>
         <th>Cliente Id</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -27,10 +31,15 @@
           <td>{{ (cuenta.saldo ?? 0) | currency:'PEN':'symbol-narrow':'1.2-2':'es-PE' }}</td>
           <td>{{ cuenta.estado ?? '-' }}</td>
           <td>{{ cuenta.clienteId ?? '-' }}</td>
+          <td>
+            <button type="button" class="table-action" (click)="goToEditCuenta(cuenta.id)">
+              Editar
+            </button>
+          </td>
         </tr>
       } @empty {
         <tr>
-          <td colspan="5">Sin cuentas para mostrar.</td>
+          <td colspan="6">Sin cuentas para mostrar.</td>
         </tr>
       }
     </tbody>

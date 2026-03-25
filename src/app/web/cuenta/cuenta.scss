@@ -6,11 +6,34 @@
   padding: 22px 28px;
 }
 
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
 h1 {
   margin: 0 0 8px;
   font-family: Georgia, 'Times New Roman', serif;
   font-weight: 500;
   font-size: 44px;
+}
+
+button {
+  min-width: 140px;
+  height: 44px;
+  border: 0;
+  background: #f2d309;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.table-action {
+  min-width: 92px;
+  height: 36px;
+  font-size: 16px;
 }
 
 p {

@@ -1,0 +1,69 @@
+<section class="page">
+  <div class="heading-row">
+    <div>
+      <h1>@if (isEditMode()) { Editar cuenta } @else { Nueva cuenta }</h1>
+      <p>Completa los datos para guardar la cuenta.</p>
+    </div>
+
+    <a routerLink="/cuentas" class="secondary-action">Volver</a>
+  </div>
+
+  @if (loading()) {
+    <p>Cargando cuenta...</p>
+  } @else {
+    <form class="form-card" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-grid">
+        <label>
+          <span>Número de cuenta</span>
+          <input type="text" formControlName="numeroCuenta" />
+          @if (fieldInvalid('numeroCuenta')) {
+            <small>Número de cuenta es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Cliente Id</span>
+          <input type="number" formControlName="clienteId" />
+          @if (fieldInvalid('clienteId')) {
+            <small>Cliente Id válido es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Saldo</span>
+          <input type="number" formControlName="saldo" />
+          @if (fieldInvalid('saldo')) {
+            <small>Saldo válido es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Tipo de cuenta</span>
+          <input type="text" formControlName="tipoCuenta" />
+          @if (fieldInvalid('tipoCuenta')) {
+            <small>Tipo de cuenta es obligatorio.</small>
+          }
+        </label>
+
+        <label>
+          <span>Estado</span>
+          <input type="text" formControlName="estado" />
+          @if (fieldInvalid('estado')) {
+            <small>Estado es obligatorio.</small>
+          }
+        </label>
+      </div>
+
+      @if (error(); as errorMessage) {
+        <p class="error-message">{{ errorMessage }}</p>
+      }
+
+      <div class="actions-row">
+        <a routerLink="/cuentas" class="secondary-action">Cancelar</a>
+        <button type="submit" [disabled]="saving()">
+          @if (saving()) { Guardando... } @else if (isEditMode()) { Actualizar } @else { Crear }
+        </button>
+      </div>
+    </form>
+  }
+</section>

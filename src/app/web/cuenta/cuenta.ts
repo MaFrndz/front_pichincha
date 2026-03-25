@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { Cuenta } from './cuenta-model';
 import { CuentaService } from './cuenta-service';
@@ -17,6 +18,7 @@ export class CuentaComponent {
   protected readonly error = signal<string | null>(null);
 
   private readonly cuentaService: CuentaService = inject(CuentaService);
+  private readonly router = inject(Router);
 
   constructor() {
     this.loadCuentas();
@@ -36,5 +38,13 @@ export class CuentaComponent {
         this.loading.set(false);
       }
     });
+  }
+
+  protected goToCreateCuenta(): void {
+    void this.router.navigate(['/cuentas/nuevo']);
+  }
+
+  protected goToEditCuenta(id: number): void {
+    void this.router.navigate(['/cuentas/editar', id]);
   }
 }
